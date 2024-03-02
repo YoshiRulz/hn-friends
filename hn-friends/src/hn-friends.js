@@ -7,7 +7,7 @@ css(`
     padding: 0.25em;
   }
 
-  .friends.tagged::after {
+  .hnuser[title]::after {
     background: url("${chrome.extension.getURL("img/tag.svg")}") no-repeat 0 0 / 1em 0.75em;
     content: "";
     display: inline-block;
@@ -29,7 +29,6 @@ css(`
     }
     if (username in tags) {
       user.title = tags[username];
-      user.classList.add("tagged");
     }
   }
 })();
