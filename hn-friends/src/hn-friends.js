@@ -7,19 +7,16 @@ css(`
     padding: 0.25em;
   }
 
-  .tag {
-    height: 0.75em;
+  .friends.tagged::after {
+    background: url("${chrome.extension.getURL("img/tag.svg")}") no-repeat 0 0 / 1em 0.75em;
+    content: "";
+    display: inline-block;
+    height: 1em;
+    margin-inline-start: 0.25em;
+    vertical-align: middle;
+    width: 1em;
   }
 `);
-
-function addTagElement(user, tag) {
-  const img = document.createElement('img');
-  img.src = chrome.extension.getURL('img/tag.svg');
-  img.className = 'tag';
-  img.title = tag;
-  user.parentElement.insertBefore(img, user.nextSibling);
-  user.parentElement.insertBefore(document.createTextNode(' '), img);
-}
 
 (async () => {
   const { friends, tags } = await data;
@@ -32,7 +29,7 @@ function addTagElement(user, tag) {
     }
     if (username in tags) {
       user.title = tags[username];
-      addTagElement(user, tags[username]);
+      user.classList.add("tagged");
     }
   }
 })();
